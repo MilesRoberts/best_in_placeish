@@ -11,9 +11,8 @@ Most of the read-me below is a direct copy of best_in_place's read-me, as the va
 
 ##Description
 
-**Best in Place** is a jQuery based AJAX Inplace-Editor that takes profit of RESTful server-side controllers to allow users to edit stuff with
-no need of forms. If the server has standard defined REST methods, particularly those to UPDATE your objects (HTTP PUT), adding the
-Javascript file to the application will make all the fields with the proper defined classes in-place editable.
+**Best in Placeish** is a jQuery based AJAX Inplace-Editor that takes profit of RESTful server-side controllers to allow users to edit content without using a form. If the server has standard defined REST methods, particularly those to UPDATE your objects (HTTP PUT), adding the
+Javascript file to the application will make all the fields with the proper classes in-place editable.
 
 The editor works by PUTting the updated value to the server and GETting the updated record afterwards to display the updated value.
 
@@ -39,8 +38,8 @@ The editor works by PUTting the updated value to the server and GETting the upda
 
 Params:
 
-- **object** (Mandatory): The Object parameter represents the object you are about to modify
-- **field** (Mandatory): The field (passed as symbol) is the attribute of the Object you are going to display/edit.
+- **object** (required): The Object parameter represents the object you are about to modify
+- **field** (required): The field (passed as symbol) is the attribute of the Object you are going to display/edit.
 
 Options:
 
@@ -88,6 +87,7 @@ If you are using a Rails application, your controllers should respond to json. *
 Example:
 
     Class UsersController
+    
       respond_to :html, :json
     
       def update
@@ -108,6 +108,7 @@ Example:
 At the same time, you must define the restrictions, validations and error messages in the model, as the example below:
 
     class User < ActiveRecord::Base
+    
       validates :name,
         :length => { :minimum => 2, :maximum => 24, :message => "has invalid length"},
         :presence => {:message => "can't be blank"}
@@ -121,6 +122,7 @@ At the same time, you must define the restrictions, validations and error messag
         :presence => {:message => "can't be blank"},
         :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "has wrong email format"}
       validates :zip, :numericality => true, :length => { :minimum => 5 }
+      
     end
 
 When the user tries to introduce invalid data, the error messages defined in the model will be displayed in pop-up windows using the jQuery.purr plugin.
@@ -157,7 +159,6 @@ Remember to do it every time you update the gem (or you will see no change).
 To be able to use the script the following block must be added as well:
 
     $(document).ready(function() {
-      /* Activating Best In Place */
       jQuery(".best_in_placeish").best_in_placeish()
     });
 
@@ -188,9 +189,13 @@ If the script is used with the Rails Gem no html tags will be allowed unless the
   of key ESCAPE for destroying changes before they are made permanent (in inputs and textarea).
 - v.0.1.6-0.1.7 Avoiding request when the input is not modified and allowing the user to not sanitize input data.
 - v.0.1.8 jslint compliant, sanitizing tags in the gem, getting right csrf params, controlling size of textarea (elastic script, for autogrowing textarea)
+- v.0.2.2 last rails 3.0.x version according to best_in_place project page
+- v.0.2.4 first best_in_placeish release, added success messaging and :display_as functions
 
 ##Authors, License and Stuff
 
-Code by [Bernat Farrero](http://bernatfarrero.com) from [Itnig Web Services](http://itnig.net) (it was based on the [original project](http://github.com/janv/rest_in_place/) of Jan Varwig) and released under [MIT license](http://www.opensource.org/licenses/mit-license.php).
+Original best_in_place code by [Bernat Farrero](http://bernatfarrero.com) from [Itnig Web Services](http://itnig.net) (it was based on the [original project](http://github.com/janv/rest_in_place/) of Jan Varwig) and released under [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
-Many thanks to the contributors: [Roger Campos](http://github.com/rogercampos) and [Jack Senechal](https://github.com/jacksenechal)
+best_in_place contributors: [Roger Campos](http://github.com/rogercampos) and [Jack Senechal](https://github.com/jacksenechal)
+
+best_in_placeish-specific code by [Miles Roberts](http://github.com/MilesRoberts)
