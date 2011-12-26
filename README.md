@@ -86,22 +86,22 @@ If not defined, it will default to *Yes* and *No* options.
 
 If you are using a Rails application, your controllers should respond to json. **best_in_placeish adds an additional step here, requiring a hash containing your success message to be displayed using Purr.**
 Example:
-  Class UsersController
-    respond_to :html, :json
-  
-    def update
-    @user = User.find(params[:id])
-    respond_with(@user) do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user) }
-        format.json { render :json => { :success=>"User was successfully updated." }, :status => :ok }
-      else
-        format.html { render :action => "edit" }
-        format.json { render :json => @user.errors.full_messages, :status => :unprocessable_entity }
-      end
-    end
+    Class UsersController
+      respond_to :html, :json
     
-  end
+      def update
+      @user = User.find(params[:id])
+      respond_with(@user) do |format|
+        if @user.update_attributes(params[:user])
+          format.html { redirect_to(@user) }
+          format.json { render :json => { :success=>"User was successfully updated." }, :status => :ok }
+        else
+          format.html { render :action => "edit" }
+          format.json { render :json => @user.errors.full_messages, :status => :unprocessable_entity }
+        end
+      end
+      
+    end
 
 
 At the same time, you must define the restrictions, validations and error messages in the model, as the example below:
