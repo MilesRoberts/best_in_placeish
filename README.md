@@ -2,8 +2,8 @@
 Forked from the rails-3.0 branch of best_in_place, this includes a couple of key enhancements for Rails 3.0.x users
 
 Additional features not found in best_in_place-0.2.2:
-Integrated **:display_as** functionality from master branch of best_in_place
-Added purr notifications for successful updates (see updated usage notes for example)
+- Integrated **:display_as** functionality from master branch of best_in_place
+- Added purr notifications for successful updates (see updated usage notes for example)
 
 Most of the read-me below is a direct copy of best_in_place's read-me, as the vast majority of the usage is the same, though the added features are also noted below.
 
