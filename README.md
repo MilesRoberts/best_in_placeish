@@ -35,7 +35,7 @@ The editor works by PUTting the updated value to the server and GETting the upda
 
 ##Usage of Rails 3 Gem
 
-**best_in_place object, field, OPTIONS**
+**best_in_placeish object, field, OPTIONS**
 
 Params:
 
@@ -60,24 +60,24 @@ Examples (code in the views):
 
 ### Input
 
-    <%= best_in_place @user, :name, :type => :input %>
+    <%= best_in_placeish @user, :name, :type => :input %>
 
-    <%= best_in_place @user, :name, :type => :input, :nil => "Click me to add content!" %>
+    <%= best_in_placeish @user, :name, :type => :input, :nil => "Click me to add content!" %>
 
 ### Textarea
 
-    <%= best_in_place @user, :description, :type => :textarea %>
+    <%= best_in_placeish @user, :description, :type => :textarea %>
 
 ### Select
 
-    <%= best_in_place @user, :country, :type => :select, :collection => [[1, "Spain"], [2, "Italy"], [3, "Germany"], [4, "France"]] %>
+    <%= best_in_placeish @user, :country, :type => :select, :collection => [[1, "Spain"], [2, "Italy"], [3, "Germany"], [4, "France"]] %>
 
 Of course it can take an instance or global variable for the collection, just remember the structure [[key, value], [key, value],...].
 The key can be a string or an integer.
 
 ### Checkbox
 
-    <%= best_in_place @user, :receive_emails, :type => :checkbox, :collection => ["No, thanks", "Yes, of course!"] %>
+    <%= best_in_placeish @user, :receive_emails, :type => :checkbox, :collection => ["No, thanks", "Yes, of course!"] %>
 
 The first value is always the negative boolean value and the second the positive. Structure: ["false value", "true value"].
 If not defined, it will default to *Yes* and *No* options.
@@ -133,7 +133,7 @@ When the user tries to introduce invalid data, the error messages defined in the
 You can use custom methods in your model in order to
 decide how a certain field has to be displayed. You can write something like:
 
-    = best_in_place @user, :description, :type => :textarea, :display_as => :mk_description
+    = best_in_placeish @user, :description, :type => :textarea, :display_as => :mk_description
 
 Then instead of using `@user.description` to show the actual value, best in
 place will call `@user.mk_description`. This can be used for any kind of
@@ -146,18 +146,18 @@ in the following order:
 
 - jquery-1.4.4.js
 - jquery.purr.js
-- **best_in_place.js**
+- **best_in_placeish.js**
 
 The last one you can copy it (and keeping up to date to the last version) by running the following generator in your application's root.
 Remember to do it every time you update the gem (or you will see no change).
 
-    rails g best_in_place:setup
+    rails g best_in_placeish:setup
 
 To be able to use the script the following block must be added as well:
 
     $(document).ready(function() {
       /* Activating Best In Place */
-      jQuery(".best_in_place").best_in_place()
+      jQuery(".best_in_placeish").best_in_placeish()
     });
 
 In order to use the Rails 3 gem, just add the following line to the gemfile:
