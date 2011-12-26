@@ -180,6 +180,8 @@ If the script is used with the Rails Gem no html tags will be allowed unless the
 
 ##Changelog
 
+best_in_place:
+
 - v.0.1.0 Initial deploy
 - v.0.1.2 Fixing errors in collections (taken value[0] instead of index) and fixing test_app controller responses
 - v.0.1.3 Bug in Rails Helper. Key wrongly considered an Integer.
@@ -190,6 +192,9 @@ If the script is used with the Rails Gem no html tags will be allowed unless the
 - v.0.1.6-0.1.7 Avoiding request when the input is not modified and allowing the user to not sanitize input data.
 - v.0.1.8 jslint compliant, sanitizing tags in the gem, getting right csrf params, controlling size of textarea (elastic script, for autogrowing textarea)
 - v.0.2.2 last rails 3.0.x version according to best_in_place project page
+
+best_in_placeish:
+
 - v.0.2.4 first best_in_placeish release, added success messaging and :display_as functions
 
 ##Authors, License and Stuff
