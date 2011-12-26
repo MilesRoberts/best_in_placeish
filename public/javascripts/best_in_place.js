@@ -55,7 +55,7 @@ BestInPlaceEditor.prototype = {
       "type"       : "post",
       "dataType"   : "text",
       "data"       : editor.requestData(),
-      "success"    : function(data){ editor.loadSuccessCallback(data); },
+      "success"    : function(data, request){ editor.loadSuccessCallback(data, request); },
       "error"      : function(request, error){ editor.loadErrorCallback(request, error); }
     });
     if (this.formType == "select") {
@@ -182,6 +182,12 @@ BestInPlaceEditor.prototype = {
      this.element.html(response["display_as"]);
     }
     this.element.trigger($.Event("ajax:success"), data);
+    
+    $.each(jQuery.parseJSON(data), function(index, value) {
+      if( typeof(value) == "object") {value = index + " " + value.toString(); }
+      var container = $("<span class='flash-success'></span>").html(value);
+      container.purr();
+    });
 
     // Binding back after being clicked
     $(this.activator).bind('click', {editor: this}, this.clickHandler);
@@ -189,6 +195,8 @@ BestInPlaceEditor.prototype = {
 
   loadErrorCallback : function(request, error) {
     this.element.html(this.oldValue);
+    
+    // var response = $.parseJSON(request.responseText);
 
     // Display all error messages from server side validation
     $.each(jQuery.parseJSON(request.responseText), function(index, value) {
