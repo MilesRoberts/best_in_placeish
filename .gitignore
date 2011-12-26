@@ -1,7 +1,6 @@
 .DS_Store
 .bundle
 pkg/*
-*.gem
 
 Gemfile.lock
 test_app/.bundle
