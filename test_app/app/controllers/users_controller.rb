@@ -69,10 +69,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        format.json { respond_with_bip(@user) }
+        format.json { head :ok }
       else
         format.html { render :action => "edit" }
-        format.json { respond_with_bip(@user) }
+        format.json  { render :json => @user.errors.full_messages, :status => :unprocessable_entity }
       end
     end
   end

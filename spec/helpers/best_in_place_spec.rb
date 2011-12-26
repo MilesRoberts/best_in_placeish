@@ -123,16 +123,6 @@ describe BestInPlace::BestInPlaceHelpers do
         span = nk.css("span")
         span.attribute("data-activator").value.should == "awesome"
       end
-
-      describe "display_as" do
-        it "should render the address with a custom renderer" do
-          @user.should_receive(:address_format).and_return("the result")
-          out = helper.best_in_place @user, :address, :display_as => :address_format
-          nk = Nokogiri::HTML.parse(out)
-          span = nk.css("span")
-          span.text.should == "the result"
-        end
-      end
     end
 
 
@@ -209,18 +199,6 @@ describe BestInPlace::BestInPlaceHelpers do
       it "should show the current country" do
         @span.text.should == "Italy"
       end
-
-      context "with an apostrophe in it" do
-        before do
-          @apostrophe_countries = [[1, "Joe's Country"], [2, "Bob's Country"]]
-          nk = Nokogiri::HTML.parse(helper.best_in_place @user, :country, :type => :select, :collection => @apostrophe_countries)
-          @span = nk.css("span")
-        end
-
-        it "should have a proper data collection" do
-          @span.attribute("data-collection").value.should == @apostrophe_countries.to_json
-        end
-      end
     end
   end
 
@@ -230,7 +208,7 @@ describe BestInPlace::BestInPlaceHelpers do
         @output = "Some Value"
         @field = :somefield
         @object = mock("object", @field => @output)
-        @options = {}
+        @options = mock("options")
       end
       context "when the condition is true" do
         before {@condition = true}

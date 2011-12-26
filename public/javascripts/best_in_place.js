@@ -31,20 +31,8 @@ BestInPlaceEditor.prototype = {
   // Public Interface Functions //////////////////////////////////////////////
 
   activate : function() {
-    var to_display = "";
-    if (this.isNil) {
-      to_display = "";
-    }
-    else if (this.original_content) {
-      to_display = this.original_content;
-    }
-    else {
-      to_display = this.element.html();
-    }
-
     var elem = this.isNil ? "" : this.element.html();
     this.oldValue = elem;
-    this.display_value = to_display;
     $(this.activator).unbind("click", this.clickHandler);
     this.activateForm();
   },
@@ -103,7 +91,6 @@ BestInPlaceEditor.prototype = {
       self.nil           = self.nil           || jQuery(this).attr("data-nil");
       self.inner_class   = self.inner_class   || jQuery(this).attr("data-inner-class");
       self.html_attrs    = self.html_attrs    || jQuery(this).attr("data-html-attrs");
-      self.original_content    = self.original_content    || jQuery(this).attr("data-original-content");
     });
 
     // Try Rails-id based if parents did not explicitly supply something
@@ -124,7 +111,6 @@ BestInPlaceEditor.prototype = {
     self.nil           = self.element.attr("data-nil")          || self.nil      || "-";
     self.inner_class   = self.element.attr("data-inner-class")  || self.inner_class   || null;
     self.html_attrs    = self.element.attr("data-html-attrs") || self.html_attrs;
-    self.original_content    = self.element.attr("data-original-content") || self.original_content;
 
     if (!self.element.attr("data-sanitize")) {
       self.sanitize = true;
@@ -191,14 +177,10 @@ BestInPlaceEditor.prototype = {
   // Handlers ////////////////////////////////////////////////////////////////
 
   loadSuccessCallback : function(data) {
-<<<<<<< HEAD:lib/assets/javascripts/best_in_place.js
     var response = $.parseJSON($.trim(data));
     if (response != null && response.hasOwnProperty("display_as")) {
-      this.element.html(response["display_as"]);
+     this.element.html(response["display_as"]);
     }
-=======
-    this.element.html(data[this.objectName]);
->>>>>>> rails-3.0:test_app/public/javascripts/best_in_place.js
     this.element.trigger($.Event("ajax:success"), data);
 
     // Binding back after being clicked
@@ -237,7 +219,7 @@ BestInPlaceEditor.forms = {
   "input" : {
     activateForm : function() {
       var output = '<form class="form_in_place" action="javascript:void(0)" style="display:inline;">';
-      output += '<input type="text" name="'+ this.attributeName + '" value="' + this.sanitizeValue(this.display_value) + '"';
+      output += '<input type="text" name="'+ this.attributeName + '" id="'+ this.attributeName + '" value="' + this.sanitizeValue(this.oldValue) + '"';
       if (this.inner_class != null) {
         output += ' class="' + this.inner_class + '"';
       }
@@ -322,7 +304,7 @@ BestInPlaceEditor.forms = {
 
       // construct the form
       var output = '<form action="javascript:void(0)" style="display:inline;"><textarea>';
-      output += this.sanitizeValue(this.display_value);
+      output += this.sanitizeValue(this.oldValue);
       output += '</textarea></form>';
       this.element.html(output);
       this.setHtmlAttributes();
