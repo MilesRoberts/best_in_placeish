@@ -86,6 +86,7 @@ If not defined, it will default to *Yes* and *No* options.
 
 If you are using a Rails application, your controllers should respond to json. **best_in_placeish adds an additional step here, requiring a hash containing your success message to be displayed using Purr.**
 Example:
+
     Class UsersController
       respond_to :html, :json
     
