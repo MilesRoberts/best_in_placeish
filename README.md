@@ -202,6 +202,7 @@ best_in_place:
 best_in_placeish:
 
 - v.0.2.4 first best_in_placeish release, added success messaging and :display_as functions
+- v.0.2.5 added datepicker function (requires jqueryUI)
 
 ##Authors, License and Stuff
 
