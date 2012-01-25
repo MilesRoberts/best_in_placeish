@@ -258,6 +258,45 @@ BestInPlaceEditor.forms = {
       }
     }
   },
+  
+  "datepicker" : {
+    activateForm : function() {
+      var output = '<form class="form_in_place" action="javascript:void(0)" style="display:inline;">';
+      output += '<input type="text" name="'+ this.attributeName + '" id="'+ this.attributeName + '" value="' + this.sanitizeValue(this.oldValue) + '"';
+      if (this.inner_class != null) {
+        output += ' class="' + this.inner_class + '"';
+      }
+      output += '></form>'
+      this.element.html(output);
+      this.setHtmlAttributes();
+      $('input#' + this.attributeName).datepicker({ 
+        dateFormat: 'dd/M/yy',
+        onClose: function() { $('form.form_in_place').submit(); }
+      });
+      this.element.find('input')[0].select();
+      this.element.find("form").bind('submit', {editor: this}, BestInPlaceEditor.forms.datepicker.submitHandler);
+      //this.element.find("input").bind('blur',   {editor: this}, BestInPlaceEditor.forms.datepicker.inputBlurHandler);
+      this.element.find("input").bind('keyup', {editor: this}, BestInPlaceEditor.forms.datepicker.keyupHandler);
+    },
+
+    getValue :  function() {
+      return this.sanitizeValue(this.element.find("input").val());
+    },
+
+    inputBlurHandler : function(event) {
+      event.data.editor.update();
+    },
+
+    submitHandler : function(event) {
+      event.data.editor.update();
+    },
+
+    keyupHandler : function(event) {
+      if (event.keyCode == 27) {
+        event.data.editor.abort();
+      }
+    }
+  },
 
   "select" : {
     activateForm : function() {
