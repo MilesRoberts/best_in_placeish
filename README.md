@@ -5,6 +5,7 @@ Forked from the rails-3.0 branch of best_in_place, this includes a couple of key
 
 - Integrated **:display_as** functionality from master branch of best_in_place
 - Added purr notifications for successful updates (see updated usage notes for example)
+- jQueryUI datepicker integration (requires jQueryUI)
 
 Most of the read-me below is a direct copy of best_in_place's read-me, as the vast majority of the usage is the same, though the added features are also noted below.
 
@@ -202,7 +203,7 @@ best_in_place:
 best_in_placeish:
 
 - v.0.2.4 first best_in_placeish release, added success messaging and :display_as functions
-- v.0.2.5 added datepicker function (requires jqueryUI)
+- v.0.2.5 added datepicker function (requires jQueryUI)
 
 ##Authors, License and Stuff
 
