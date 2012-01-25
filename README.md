@@ -62,6 +62,12 @@ Examples (code in the views):
     <%= best_in_placeish @user, :name, :type => :input %>
 
     <%= best_in_placeish @user, :name, :type => :input, :nil => "Click me to add content!" %>
+    
+### Datepicker (REQUIRES JQUERYUI - http://jqueryui.com/)
+
+    <%= best_in_placeish @user, :registered_on, :type => :datepicker %>
+    
+Currently returns the selected date in dd/MMM/yyyy format (for example: 01/JAN/2012)
 
 ### Textarea
 
